@@ -5,6 +5,56 @@ st.set_page_config(page_title="Flow System Dashboard", layout="centered")
 st.title("🧠 Flow System Dashboard")
 
 # -------------------
+# REAL SYSTEM LIBRARY
+# -------------------
+system_library = {
+    "Custom": {
+        "system": "Duqm Logistics",
+        "flow_type": "Logistics",
+        "stage": "Transfer",
+        "multiplicity": 2,
+        "sync": "Partial",
+    },
+    "Duqm Logistics": {
+        "system": "Duqm Logistics",
+        "flow_type": "Logistics",
+        "stage": "Transfer",
+        "multiplicity": 2,
+        "sync": "Partial",
+    },
+    "Oil Export Route": {
+        "system": "Oil Export Route",
+        "flow_type": "Energy",
+        "stage": "Transfer",
+        "multiplicity": 1,
+        "sync": "Partial",
+    },
+    "Knowledge Flow Memo": {
+        "system": "Knowledge Flow Memo",
+        "flow_type": "Knowledge",
+        "stage": "Synchronization",
+        "multiplicity": 2,
+        "sync": "None",
+    },
+    "Maritime Chokepoint": {
+        "system": "Maritime Chokepoint",
+        "flow_type": "Logistics",
+        "stage": "Transfer",
+        "multiplicity": 1,
+        "sync": "Partial",
+    },
+    "Capital Flow Hub": {
+        "system": "Capital Flow Hub",
+        "flow_type": "Capital",
+        "stage": "Propagation",
+        "multiplicity": 3,
+        "sync": "Full",
+    },
+}
+
+selected_system = st.selectbox("System Library", list(system_library.keys()))
+preset = system_library[selected_system]
+# -------------------
 # INPUTS
 # -------------------
 st.header("Inputs")
