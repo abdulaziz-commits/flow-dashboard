@@ -179,3 +179,31 @@ st.caption(
     f"System: {system} | Flow Type: {flow_type} | Stage: {stage} | "
     f"Multiplicity: {multiplicity} | Synchronization: {sync}"
 )
+st.header("Multi-System Comparison")
+
+# Example systems (تقدر تغيرها لاحقًا)
+systems_data = [
+    {"name": "System A", "score": 90},
+    {"name": "System B", "score": 65},
+    {"name": "System C", "score": 30},
+]
+
+# Sort systems
+systems_data = sorted(systems_data, key=lambda x: x["score"], reverse=True)
+
+for s in systems_data:
+    if s["score"] > 80:
+        color = "#28a745"
+    elif s["score"] > 50:
+        color = "#ffc107"
+    else:
+        color = "#dc3545"
+
+    st.markdown(
+        f"""
+        <div style="padding:10px;border-radius:10px;background-color:{color};color:white;margin-bottom:5px;">
+        {s["name"]} — Score: {s["score"]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
