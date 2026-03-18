@@ -426,3 +426,86 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+# -------------------
+# SCENARIO MODE
+# -------------------
+st.header("Scenario Mode")
+
+# Current
+current_score = score
+
+# Best case assumptions
+if multiplicity < 3:
+    best_mult = multiplicity + 1
+else:
+    best_mult = multiplicity
+
+best_sync = "Full"
+
+if best_mult == 0 or best_sync == "None":
+    best_score = 10
+elif best_mult == 1 and best_sync == "Full":
+    best_score = 45
+elif best_mult == 1 and best_sync == "Partial":
+    best_score = 30
+elif best_mult > 1 and best_sync == "Full":
+    best_score = 90
+else:
+    best_score = 65
+
+# Worst case assumptions
+worst_mult = max(0, multiplicity - 1)
+worst_sync = "None" if sync == "Partial" else "Partial"
+
+if worst_mult == 0 or worst_sync == "None":
+    worst_score = 10
+elif worst_mult == 1 and worst_sync == "Full":
+    worst_score = 45
+elif worst_mult == 1 and worst_sync == "Partial":
+    worst_score = 30
+elif worst_mult > 1 and worst_sync == "Full":
+    worst_score = 90
+else:
+    worst_score = 65
+
+st.subheader("Scenario Comparison")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown(
+        f"""
+        <div style="padding:12px;border-radius:12px;background-color:#0d6efd;color:white;text-align:center;">
+        <b>Current</b><br><br>
+        Score: {current_score}/100
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col2:
+    st.markdown(
+        f"""
+        <div style="padding:12px;border-radius:12px;background-color:#198754;color:white;text-align:center;">
+        <b>Best Case</b><br><br>
+        Score: {best_score}/100
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col3:
+    st.markdown(
+        f"""
+        <div style="padding:12px;border-radius:12px;background-color:#dc3545;color:white;text-align:center;">
+        <b>Worst Case</b><br><br>
+        Score: {worst_score}/100
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+st.info(
+    "Best Case assumes stronger synchronization and/or more alternatives. "
+    "Worst Case assumes weaker synchronization and/or fewer alternatives."
+)
