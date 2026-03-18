@@ -383,3 +383,46 @@ The system requires {'immediate intervention' if score < 30 else 'targeted optim
 
     st.subheader("Generated Report")
     st.text_area("Copy & Send", report_text, height=300)
+# -------------------
+# PREDICTION MODE
+# -------------------
+st.header("Prediction Mode")
+
+# Direction logic
+if score >= 80:
+    direction = "→ Stable Trajectory"
+    risk = "Low Risk"
+    prediction = "System expected to remain stable if current conditions persist."
+elif score >= 50:
+    direction = "↘ Potential Degradation"
+    risk = "Moderate Risk"
+    prediction = "System may shift toward disturbance if constraints are not addressed."
+else:
+    direction = "↓ Collapse Trajectory"
+    risk = "High Risk"
+    prediction = "System is at risk of collapse or already degrading."
+
+# Constraint-based amplification
+if "Multiplicity" in constraint:
+    prediction += " Risk amplified by lack of alternatives."
+elif "Synchronization" in constraint:
+    prediction += " Risk amplified by coordination gaps."
+
+# Stage-based insight
+if stage == "Transfer":
+    prediction += " Transfer stage is highly sensitive to disruption."
+elif stage == "Synchronization":
+    prediction += " Misalignment at this stage can rapidly degrade system performance."
+
+# Output UI
+st.subheader("Future Direction")
+st.markdown(
+    f"""
+    <div style="padding:14px;border-radius:12px;background-color:#212529;color:white;">
+    <b>Direction:</b> {direction}<br><br>
+    <b>Risk Level:</b> {risk}<br><br>
+    <b>Prediction:</b> {prediction}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
