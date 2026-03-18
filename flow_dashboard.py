@@ -345,3 +345,41 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+# -------------------
+# REPORT MODE
+# -------------------
+st.header("Report Mode")
+
+if st.button("Generate Report"):
+
+    report_text = f"""
+Flow System Report
+
+System: {system}
+Flow Type: {flow_type}
+Stage: {stage}
+
+Flow State: {flow_state}
+Constraint: {constraint}
+Score: {score}/100
+
+Analysis:
+The system is currently operating at the '{flow_state}' level during the '{stage}' stage.
+The primary constraint identified is '{constraint}'.
+
+Strategic Insight:
+{strategic_note}
+
+Recommended Action:
+{action}
+
+Knowledge Status:
+{knowledge_status}
+{knowledge_note}
+
+Conclusion:
+The system requires {'immediate intervention' if score < 30 else 'targeted optimization' if score < 70 else 'continuous monitoring'} to ensure stable and resilient flow performance.
+"""
+
+    st.subheader("Generated Report")
+    st.text_area("Copy & Send", report_text, height=300)
