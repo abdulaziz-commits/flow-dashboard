@@ -205,5 +205,62 @@ for s in systems_data:
         {s["name"]} — Score: {s["score"]}
         </div>
         """,
+        unsafe_allow_html=st.header("AI Mode")
+
+user_prompt = st.text_area(
+    "Describe the system briefly",
+    "Duqm logistics flow is stable in production but constrained in transfer due to limited alternative routes and partial coordination."
+)
+
+if st.button("Analyze with AI Mode"):
+    text = user_prompt.lower()
+
+    # Simple rule-based interpretation
+    detected_stage = "Unknown"
+    detected_constraint = "No Clear Constraint"
+    detected_state = "Monitor"
+    detected_action = "Gather more detail."
+
+    if "production" in text:
+        detected_stage = "Production"
+    elif "transfer" in text:
+        detected_stage = "Transfer"
+    elif "synchronization" in text:
+        detected_stage = "Synchronization"
+    elif "propagation" in text:
+        detected_stage = "Propagation"
+    elif "evolution" in text:
+        detected_stage = "Evolution"
+
+    if "limited route" in text or "single route" in text or "no alternative" in text:
+        detected_constraint = "Multiplicity Constraint"
+        detected_state = "Scarcity or Disturbed Flow"
+        detected_action = "Increase routes, options, or backup sources."
+
+    if "partial coordination" in text or "misalignment" in text or "delay" in text:
+        detected_constraint = "Synchronization Constraint"
+        detected_state = "Disturbed Flow"
+        detected_action = "Improve alignment across assets and decision layers."
+
+    if "collapse" in text or "stopped" in text or "failed completely" in text:
+        detected_constraint = "Critical Failure"
+        detected_state = "Collapse"
+        detected_action = "Immediate intervention required."
+
+    if "stable" in text and "full coordination" in text:
+        detected_constraint = "No Active Constraint"
+        detected_state = "Stable Abundance"
+        detected_action = "Maintain and monitor."
+
+    st.subheader("AI Interpretation")
+    st.markdown(
+        f"""
+        <div style="padding:14px;border-radius:12px;background-color:#0b5ed7;color:white;">
+        <b>Detected Stage:</b> {detected_stage}<br><br>
+        <b>Detected State:</b> {detected_state}<br><br>
+        <b>Detected Constraint:</b> {detected_constraint}<br><br>
+        <b>Recommended Action:</b> {detected_action}
+        </div>
+        """,
         unsafe_allow_html=True
     )
